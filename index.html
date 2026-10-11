@@ -2,827 +2,748 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>French Coders | Employee Registration</title>
-
-<style>
-:root {
-  --navy: #111a2c;
-  --blue: #5965f2;
-  --text: #172033;
-  --muted: #7e899a;
-  --border: #e3e8f0;
-  --bg: #f5f7fb;
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-
-button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
-
-.navbar {
-  max-width: 1200px;
-  margin: auto;
-  padding: 22px 25px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 21px;
-  font-weight: 800;
-}
-
-.brand b { color: var(--blue); }
-
-.logo {
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  background: var(--blue);
-  color: white;
-  border-radius: 10px;
-  font-size: 13px;
-}
-
-.nav-label {
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  color: var(--muted);
-  font-weight: 700;
-}
-
-.container {
-  max-width: 1120px;
-  margin: auto;
-  padding: 0 22px;
-}
-
-.hero {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  align-items: center;
-  gap: 35px;
-  padding: 55px 0;
-}
-
-.eyebrow {
-  color: var(--blue);
-  font-size: 10px;
-  letter-spacing: 1.8px;
-  font-weight: 800;
-  margin-bottom: 15px;
-}
-
-h1 {
-  font-size: clamp(38px, 5vw, 57px);
-  letter-spacing: -2.5px;
-  line-height: 1.1;
-  margin: 0;
-}
-
-h1 span, .success h2 span { color: var(--blue); }
-
-.hero-text {
-  color: #707b8d;
-  line-height: 1.8;
-  max-width: 480px;
-  margin-top: 20px;
-}
-
-.hero-card {
-  background: var(--navy);
-  color: white;
-  padding: 30px;
-  border-radius: 18px;
-  min-height: 220px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-card .code {
-  color: #aeb5ff;
-  font-size: 25px;
-  font-weight: 800;
-}
-
-.hero-card small {
-  display: block;
-  margin-top: 22px;
-  color: #aeb7ca;
-  letter-spacing: 2px;
-}
-
-.hero-card h2 {
-  font-size: 27px;
-  line-height: 1.3;
-}
-
-.hero-card p {
-  font-size: 11px;
-  color: #dfe2ff;
-}
-
-.form-layout {
-  display: grid;
-  grid-template-columns: 230px minmax(0, 1fr);
-  border: 1px solid var(--border);
-  background: white;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 15px 40px #17203308;
-}
-
-.sidebar {
-  background: var(--navy);
-  color: white;
-  padding: 30px 22px;
-}
-
-.sidebar > p {
-  font-size: 10px;
-  color: #aeb5ff;
-  letter-spacing: 1.5px;
-  margin-bottom: 28px;
-}
-
-.step {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  margin-bottom: 25px;
-}
-
-.step-number {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  background: #26334b;
-  color: #c3c9ff;
-  display: grid;
-  place-items: center;
-  font-size: 11px;
-}
-
-.step b, .step small { display: block; }
-.step b { font-size: 11px; }
-.step small { color: #9ca8bd; font-size: 10px; margin-top: 5px; }
-
-.sidebar-note {
-  margin-top: 40px;
-  border-top: 1px solid #344057;
-  padding-top: 20px;
-  font-size: 11px;
-  color: #b7c0d0;
-  line-height: 1.7;
-}
-
-.form-content { padding: 34px; }
-
-.form-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 12px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 22px;
-  margin-bottom: 25px;
-}
-
-.form-heading .eyebrow { margin-bottom: 8px; }
-.form-heading h2 { margin: 0; font-size: 25px; }
-.form-heading p { color: var(--muted); font-size: 11px; }
-.required { color: var(--muted); font-size: 10px; white-space: nowrap; }
-
-.section-heading {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 28px 0 18px;
-}
-
-.section-number {
-  background: #eff0ff;
-  color: var(--blue);
-  border-radius: 7px;
-  padding: 8px;
-  font-size: 10px;
-  font-weight: 800;
-}
-
-.section-heading h3 { font-size: 14px; margin: 0 0 5px; }
-.section-heading p { font-size: 11px; color: var(--muted); margin: 0; }
-
-.fields {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 17px;
-}
-
-.field.full { grid-column: 1 / -1; }
-
-label.field-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.field input, .field select, .field textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #dfe4ec;
-  border-radius: 8px;
-  background: white;
-  outline: none;
-  font-size: 12px;
-  color: var(--text);
-}
-
-.field input, .field select { height: 43px; }
-
-.field textarea {
-  resize: vertical;
-  min-height: 85px;
-  line-height: 1.6;
-}
-
-.field input:focus, .field select:focus, .field textarea:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px #5965f21c;
-}
-
-.field small {
-  display: block;
-  color: var(--muted);
-  font-size: 10px;
-  margin-top: 7px;
-}
-
-.roles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.role { position: relative; cursor: pointer; }
-.role input { position: absolute; opacity: 0; }
-
-.role-card {
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 13px 10px;
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: .2s;
-}
-
-.role-card .role-icon {
-  background: #eff0ff;
-  color: var(--blue);
-  border-radius: 7px;
-  padding: 7px;
-  width: fit-content;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.role-card b { font-size: 10px; }
-.role-card small { color: var(--muted); font-size: 9px; }
-
-.role input:checked + .role-card {
-  border-color: var(--blue);
-  background: #f7f7ff;
-  box-shadow: 0 0 0 1px var(--blue);
-}
-
-.role input:focus-visible + .role-card {
-  outline: 2px solid var(--blue);
-}
-
-.form-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  margin-top: 30px;
-  padding-top: 22px;
-  border-top: 1px solid var(--border);
-}
-
-.form-footer p {
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 1.6;
-}
-
-.submit-btn {
-  border: none;
-  border-radius: 8px;
-  background: var(--blue);
-  color: white;
-  padding: 14px 18px;
-  font-size: 11px;
-  font-weight: 700;
-  transition: .2s;
-}
-
-.submit-btn:hover { background: #4652dc; }
-
-.footer {
-  max-width: 1120px;
-  margin: auto;
-  padding: 25px 22px;
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  color: #929baa;
-  font-size: 9px;
-  letter-spacing: .5px;
-}
-
-.success {
-  padding: 40px 0;
-  display: grid;
-  grid-template-columns: .8fr 1.2fr;
-  gap: 30px;
-  align-items: start;
-}
-
-.success[hidden] { display: none; }
-
-.success-icon {
-  background: #ddf8e9;
-  color: #159c66;
-  border-radius: 12px;
-  width: 48px;
-  height: 48px;
-  display: grid;
-  place-items: center;
-  font-size: 25px;
-  margin-bottom: 25px;
-}
-
-.success h2 {
-  font-size: 39px;
-  line-height: 1.15;
-  letter-spacing: -1.5px;
-}
-
-.thank-you-text {
-  color: #6f7b8d;
-  line-height: 1.8;
-  font-size: 13px;
-}
-
-.success-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 22px;
-}
-
-.edit-btn {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px 15px;
-  color: var(--text);
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.application {
-  padding: 28px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  box-shadow: 0 15px 40px #17203308;
-}
-
-.application-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.application-header .brand { font-size: 16px; }
-.application-header .logo { width: 30px; height: 30px; font-size: 10px; }
-
-.application-tag {
-  font-size: 8px;
-  font-weight: 800;
-  color: #6f7b8d;
-  background: #f2f4f8;
-  padding: 8px;
-  border-radius: 5px;
-}
-
-.application .eyebrow { margin-top: 35px; margin-bottom: 8px; }
-
-.application-title {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: center;
-}
-
-.application-title h3 {
-  margin: 0;
-  font-size: 24px;
-}
-
-.application-title span {
-  color: var(--muted);
-  font-size: 9px;
-  font-weight: 700;
-}
-
-.application-rule {
-  height: 2px;
-  background: var(--blue);
-  margin: 20px 0 25px;
-}
-
-.application-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px 15px;
-}
-
-.application-field.full { grid-column: 1 / -1; }
-
-.application-field small {
-  display: block;
-  color: #8993a3;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
-
-.application-field strong {
-  display: block;
-  font-size: 12px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
-
-.skill-list { display: flex; flex-wrap: wrap; gap: 7px; }
-
-.skill-chip {
-  padding: 6px 9px;
-  background: #eff0ff;
-  color: #4652dc;
-  border-radius: 5px;
-  font-size: 10px;
-}
-
-.application-bottom {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 30px;
-  padding-top: 17px;
-  border-top: 1px solid var(--border);
-  font-size: 8px;
-  color: var(--muted);
-}
-
-.disclaimer {
-  color: #929baa;
-  font-size: 9px;
-  line-height: 1.6;
-  margin-bottom: 0;
-}
-
-@media (max-width: 800px) {
-  .hero { grid-template-columns: 1fr; padding: 40px 0; }
-  .hero-card { min-height: 190px; }
-  .form-layout { grid-template-columns: 1fr; }
-  .sidebar { padding: 23px; }
-  .sidebar > p { margin-bottom: 20px; }
-  .step { margin-bottom: 14px; }
-  .sidebar-note { margin-top: 15px; }
-  .form-content { padding: 24px; }
-  .roles { grid-template-columns: repeat(2, 1fr); }
-  .success { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 480px) {
-  .navbar { padding: 16px; }
-  .nav-label { font-size: 8px; letter-spacing: .5px; }
-  .container { padding: 0 14px; }
-  .hero h1 { font-size: 39px; }
-  .form-content { padding: 19px 15px; }
-  .fields { grid-template-columns: 1fr; }
-  .field.full { grid-column: auto; }
-  .form-heading { align-items: flex-start; }
-  .form-heading h2 { font-size: 22px; }
-  .required { font-size: 9px; }
-  .roles { gap: 8px; }
-  .role-card { padding: 10px; }
-  .form-footer { flex-direction: column; align-items: stretch; }
-  .submit-btn { width: 100%; }
-  .footer { font-size: 8px; }
-  .application { padding: 18px 14px; }
-  .application-header .brand { font-size: 13px; gap: 6px; }
-  .application-tag { font-size: 7px; }
-  .application-grid { gap: 20px 10px; }
-  .success h2 { font-size: 35px; }
-}
-
-@media print {
-  body { background: white; }
-  .navbar, .hero, .form-layout, .footer,
-  .success-message, .disclaimer { display: none !important; }
-  .container { max-width: none; padding: 0; }
-  .success { display: block !important; padding: 0; }
-  .application { border: none; box-shadow: none; padding: 15px; }
-  .application-bottom { margin-top: 40px; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>French Coders | Employee Registration</title>
+
+  <style>
+    :root {
+      --navy: #111a2c;
+      --blue: #5965f2;
+      --light-blue: #eef0ff;
+      --text: #172033;
+      --muted: #7e899a;
+      --border: #e3e7ef;
+      --white: #ffffff;
+      --green: #16845b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6fb;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background: var(--navy);
+      color: white;
+      padding: 20px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .brand {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .brand span {
+      color: #929aff;
+    }
+
+    .nav-label {
+      font-size: 12px;
+      color: #d1d7e5;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .container {
+      width: min(900px, 92%);
+      margin: 42px auto;
+    }
+
+    .heading {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 39px);
+      line-height: 1.2;
+      margin: 10px 0;
+      color: var(--navy);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .card {
+      background: white;
+      padding: clamp(20px, 5vw, 38px);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 12px 38px #1720330b;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 0 0 22px;
+      color: var(--navy);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .full-width {
+      grid-column: 1 / -1;
+    }
+
+    label,
+    .group-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .required {
+      color: #d94848;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-size: 14px;
+      color: var(--text);
+      background: white;
+      outline: none;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px #5965f21c;
+    }
+
+    .choices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .choice {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 13px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .choice input {
+      width: auto;
+      margin: 0;
+      accent-color: var(--blue);
+    }
+
+    .submit-button,
+    .secondary-button {
+      border: 0;
+      border-radius: 9px;
+      padding: 14px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .submit-button {
+      width: 100%;
+      margin-top: 28px;
+      background: var(--blue);
+      color: white;
+    }
+
+    .submit-button:hover {
+      background: #444fe0;
+    }
+
+    .secondary-button {
+      background: var(--light-blue);
+      color: var(--blue);
+    }
+
+    .secondary-button:hover {
+      opacity: 0.85;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 25px;
+    }
+
+    /* Confirmation screen */
+
+    #successPanel {
+      display: none;
+    }
+
+    .success-header {
+      text-align: center;
+      padding: 10px 0 25px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .success-icon {
+      display: grid;
+      place-items: center;
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: #e7f8ef;
+      color: var(--green);
+      font-size: 34px;
+      font-weight: bold;
+    }
+
+    .success-header h2 {
+      color: var(--navy);
+      font-size: clamp(24px, 4vw, 32px);
+      margin: 0 0 10px;
+    }
+
+    .success-header p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    #thankYouName {
+      color: var(--blue);
+    }
+
+    .application-id {
+      margin-top: 20px;
+      display: inline-block;
+      background: var(--light-blue);
+      color: var(--blue);
+      border-radius: 8px;
+      padding: 9px 14px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .details-heading {
+      margin: 26px 0 15px;
+      font-size: 16px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .detail {
+      padding: 14px;
+      background: #f8f9fc;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .detail-label {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .full-detail {
+      grid-column: 1 / -1;
+    }
+
+    .success-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .success-actions button {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 17px 5%;
+      }
+
+      .brand {
+        font-size: 20px;
+      }
+
+      .nav-label {
+        font-size: 10px;
+      }
+
+      .container {
+        margin: 28px auto;
+      }
+
+      .form-grid,
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full-width,
+      .full-detail {
+        grid-column: auto;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .navbar,
+      .heading,
+      #registration,
+      .success-actions,
+      .footer {
+        display: none !important;
+      }
+
+      .container {
+        width: 100%;
+        margin: 0;
+      }
+
+      #successPanel {
+        display: block !important;
+      }
+
+      .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header class="navbar">
-  <div class="brand">
-    <span class="logo">&lt;/&gt;</span>
-    <span>French <b>Coders</b></span>
-  </div>
-  <span class="nav-label">CAREERS / REGISTRATION</span>
-</header>
+  <header class="navbar">
+    <div class="brand">French <span>Coders.</span></div>
+    <div class="nav-label">Employee Registration</div>
+  </header>
 
-<main class="container">
+  <main class="container">
 
-  <section class="hero">
-    <div>
-      <p class="eyebrow">YOUR FUTURE STARTS HERE</p>
-      <h1>Build your future.<br><span>Join French Coders.</span></h1>
-      <p class="hero-text">
-        Every great team starts with great people. Tell us about yourself,
-        your skills, and the opportunities you want to pursue.
+    <section class="heading">
+      <div class="eyebrow">Build your future</div>
+      <h1>Join French Coders</h1>
+      <p class="subtitle">
+        Complete the registration form to submit your application.
       </p>
-    </div>
+    </section>
 
-    <div class="hero-card">
-      <div class="code">&lt;/&gt;</div>
-      <small>FRENCH CODERS</small>
-      <h2>Think. Create.<br>Make an impact.</h2>
-      <p>✦ Your next chapter begins here</p>
-    </div>
-  </section>
+    <!-- REGISTRATION FORM -->
 
-  <section class="form-layout" id="registration">
-
-    <aside class="sidebar">
-      <p>APPLICATION PROCESS</p>
-
-      <div class="step">
-        <span class="step-number">01</span>
-        <div><b>Your details</b><small>Personal information</small></div>
-      </div>
-
-      <div class="step">
-        <span class="step-number">02</span>
-        <div><b>Your expertise</b><small>Education and skills</small></div>
-      </div>
-
-      <div class="step">
-        <span class="step-number">03</span>
-        <div><b>Your application</b><small>Review your profile</small></div>
-      </div>
-
-      <div class="sidebar-note">
-        ✦ <b>Your journey matters.</b>
-        <p>Share your information accurately so we can understand your professional profile.</p>
-      </div>
-    </aside>
-
-    <div class="form-content">
-      <div class="form-heading">
-        <div>
-          <p class="eyebrow">EMPLOYEE PROFILE</p>
-          <h2>Registration form</h2>
-          <p>Complete the fields below to generate your application.</p>
-        </div>
-        <span class="required">* Required</span>
-      </div>
+    <section class="card" id="registration">
+      <h2 class="section-title">Employee Information</h2>
 
       <form id="employeeForm">
+        <div class="form-grid">
 
-        <div class="section-heading">
-          <span class="section-number">01</span>
-          <div><h3>Personal information</h3><p>Let's start with the basics.</p></div>
-        </div>
-
-        <div class="fields">
-          <div class="field full">
-            <label class="field-label" for="name">Full name *</label>
-            <input id="name" name="name" type="text" placeholder="Enter your full name" required minlength="2" autocomplete="name">
+          <div class="field">
+            <label for="name">Full Name <span class="required">*</span></label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter your full name"
+              autocomplete="name"
+              required
+            >
           </div>
 
           <div class="field">
-            <label class="field-label" for="phone">Phone number *</label>
-            <input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" required autocomplete="tel" pattern="[+]?[0-9 ()-]{7,20}" title="Enter a valid phone number">
+            <label for="phone">Phone Number <span class="required">*</span></label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="Enter phone number"
+              autocomplete="tel"
+              pattern="[0-9+() -]{7,20}"
+              required
+            >
           </div>
 
           <div class="field">
-            <label class="field-label" for="email">Email address *</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
           </div>
 
           <div class="field">
-            <label class="field-label" for="age">Age *</label>
-            <input id="age" name="age" type="number" placeholder="Enter your age" min="16" max="100" required>
+            <label for="age">Age <span class="required">*</span></label>
+            <input
+              type="number"
+              id="age"
+              name="age"
+              placeholder="Enter your age"
+              min="16"
+              max="100"
+              required
+            >
           </div>
 
           <div class="field">
-            <label class="field-label" for="height">Height (cm) *</label>
-            <input id="height" name="height" type="number" placeholder="e.g. 175" min="80" max="250" step="0.1" required>
+            <label for="height">Height (cm) <span class="required">*</span></label>
+            <input
+              type="number"
+              id="height"
+              name="height"
+              placeholder="e.g. 175"
+              min="50"
+              max="250"
+              required
+            >
           </div>
-        </div>
 
-        <div class="section-heading">
-          <span class="section-number">02</span>
-          <div><h3>Education &amp; skills</h3><p>Tell us about your professional foundation.</p></div>
-        </div>
-
-        <div class="fields">
-          <div class="field full">
-            <label class="field-label" for="education">Highest level of education *</label>
+          <div class="field">
+            <label for="education">Education <span class="required">*</span></label>
             <select id="education" name="education" required>
-              <option value="" disabled selected>Select your qualification</option>
-              <option>High School / Secondary</option>
+              <option value="">Select education</option>
+              <option>High School</option>
               <option>Diploma</option>
               <option>Bachelor's Degree</option>
               <option>Master's Degree</option>
-              <option>Doctorate / PhD</option>
-              <option>Professional Certification</option>
+              <option>PhD</option>
               <option>Other</option>
             </select>
           </div>
 
-          <div class="field full">
-            <label class="field-label" for="skills">Professional skills *</label>
-            <textarea id="skills" name="skills" rows="4" placeholder="e.g. Python, SQL, Excel, communication, financial modelling..." required minlength="2"></textarea>
-            <small>Separate multiple skills with commas.</small>
+          <div class="field full-width">
+            <span class="group-label">Preferred Role <span class="required">*</span></span>
+
+            <div class="choices">
+              <label class="choice">
+                <input type="radio" name="role" value="Frontend Developer" required>
+                Frontend Developer
+              </label>
+
+              <label class="choice">
+                <input type="radio" name="role" value="Backend Developer">
+                Backend Developer
+              </label>
+
+              <label class="choice">
+                <input type="radio" name="role" value="Full Stack Developer">
+                Full Stack Developer
+              </label>
+
+              <label class="choice">
+                <input type="radio" name="role" value="UI/UX Designer">
+                UI/UX Designer
+              </label>
+
+              <label class="choice">
+                <input type="radio" name="role" value="Software Engineer">
+                Software Engineer
+              </label>
+            </div>
           </div>
+
+          <div class="field full-width">
+            <span class="group-label">Skills (select all that apply)</span>
+
+            <div class="choices">
+              <label class="choice">
+                <input type="checkbox" name="skills" value="HTML">
+                HTML
+              </label>
+
+              <label class="choice">
+                <input type="checkbox" name="skills" value="CSS">
+                CSS
+              </label>
+
+              <label class="choice">
+                <input type="checkbox" name="skills" value="JavaScript">
+                JavaScript
+              </label>
+
+              <label class="choice">
+                <input type="checkbox" name="skills" value="Python">
+                Python
+              </label>
+
+              <label class="choice">
+                <input type="checkbox" name="skills" value="Java">
+                Java
+              </label>
+
+              <label class="choice">
+                <input type="checkbox" name="skills" value="C++">
+                C++
+              </label>
+
+              <label class="choice">
+                <input type="checkbox" name="skills" value="SQL">
+                SQL
+              </label>
+
+              <label class="choice">
+                <input type="checkbox" name="skills" value="React">
+                React
+              </label>
+            </div>
+          </div>
+
         </div>
 
-        <div class="section-heading">
-          <span class="section-number">03</span>
-          <div><h3>Area of interest</h3><p>Select the role that interests you most.</p></div>
-        </div>
-
-        <div class="roles">
-          <label class="role">
-            <input type="radio" name="role" value="Data Analyst" required>
-            <span class="role-card"><span class="role-icon">↗</span><b>Data Analyst</b><small>Insights &amp; analytics</small></span>
-          </label>
-
-          <label class="role">
-            <input type="radio" name="role" value="Financial Manager" required>
-            <span class="role-card"><span class="role-icon">₹</span><b>Financial Manager</b><small>Finance &amp; planning</small></span>
-          </label>
-
-          <label class="role">
-            <input type="radio" name="role" value="Budget Analyst" required>
-            <span class="role-card"><span class="role-icon">▤</span><b>Budget Analyst</b><small>Budgets &amp; forecasts</small></span>
-          </label>
-
-          <label class="role">
-            <input type="radio" name="role" value="Software Developer" required>
-            <span class="role-card"><span class="role-icon">&lt;/&gt;</span><b>Software Developer</b><small>Technology &amp; products</small></span>
-          </label>
-
-          <label class="role">
-            <input type="radio" name="role" value="Business Analyst" required>
-            <span class="role-card"><span class="role-icon">◎</span><b>Business Analyst</b><small>Strategy &amp; solutions</small></span>
-          </label>
-
-          <label class="role">
-            <input type="radio" name="role" value="Project Manager" required>
-            <span class="role-card"><span class="role-icon">◷</span><b>Project Manager</b><small>Projects &amp; delivery</small></span>
-          </label>
-        </div>
-
-        <div class="form-footer">
-          <p>By submitting, you confirm that the details provided are accurate.</p>
-          <button class="submit-btn" type="submit">Submit application ↗</button>
-        </div>
-
+        <button type="submit" class="submit-button">
+          Submit Application →
+        </button>
       </form>
-    </div>
-  </section>
+    </section>
 
-  <section class="success" id="successPanel" hidden>
+    <!-- SUCCESS / THANK-YOU SCREEN -->
 
-    <div class="success-message">
-      <div class="success-icon">✓</div>
-      <p class="eyebrow">APPLICATION GENERATED</p>
+    <section class="card" id="successPanel">
 
-      <h2>Thank you for<br><span>stepping forward!</span></h2>
+      <div class="success-header">
+        <div class="success-icon">✓</div>
 
-      <p class="thank-you-text">
-        Thank you for submitting your application!
-        We look forward to working with you and welcoming you as a fellow
-        member of French Coders.
-      </p>
+        <div class="eyebrow">Application prepared</div>
+
+        <h2>
+          Thank you for applying,
+          <span id="thankYouName">Applicant</span>!
+        </h2>
+
+        <p id="thankYouMessage">
+          Thank you for your interest in French Coders.
+        </p>
+
+        <div class="application-id">
+          Application ID: <span id="applicationId"></span>
+        </div>
+      </div>
+
+      <h3 class="details-heading">Your Application Details</h3>
+
+      <div class="details-grid">
+
+        <div class="detail">
+          <span class="detail-label">Full Name</span>
+          <span class="detail-value" id="outName"></span>
+        </div>
+
+        <div class="detail">
+          <span class="detail-label">Age</span>
+          <span class="detail-value" id="outAge"></span>
+        </div>
+
+        <div class="detail">
+          <span class="detail-label">Phone Number</span>
+          <span class="detail-value" id="outPhone"></span>
+        </div>
+
+        <div class="detail">
+          <span class="detail-label">Email Address</span>
+          <span class="detail-value" id="outEmail"></span>
+        </div>
+
+        <div class="detail">
+          <span class="detail-label">Height</span>
+          <span class="detail-value" id="outHeight"></span>
+        </div>
+
+        <div class="detail">
+          <span class="detail-label">Education</span>
+          <span class="detail-value" id="outEducation"></span>
+        </div>
+
+        <div class="detail full-detail">
+          <span class="detail-label">Selected Role</span>
+          <span class="detail-value" id="outRole"></span>
+        </div>
+
+        <div class="detail full-detail">
+          <span class="detail-label">Skills</span>
+          <span class="detail-value" id="outSkills"></span>
+        </div>
+
+        <div class="detail full-detail">
+          <span class="detail-label">Application Date</span>
+          <span class="detail-value" id="outDate"></span>
+        </div>
+
+      </div>
 
       <div class="success-actions">
-        <button class="submit-btn" id="printBtn" type="button">Print / Save as PDF ↗</button>
-        <button class="edit-btn" id="editBtn" type="button">Edit application</button>
-      </div>
-    </div>
+        <button type="button" class="secondary-button" id="editBtn">
+          ← Edit Application
+        </button>
 
-    <article class="application">
-      <div class="application-header">
-        <div class="brand">
-          <span class="logo">&lt;/&gt;</span>
-          <span>French <b>Coders</b></span>
-        </div>
-        <span class="application-tag">EMPLOYEE APPLICATION</span>
+        <button type="button" class="submit-button" id="printBtn" style="margin-top: 0;">
+          Print / Save PDF
+        </button>
       </div>
 
-      <p class="eyebrow">PEOPLE &amp; CULTURE</p>
+    </section>
 
-      <div class="application-title">
-        <h3>Employee profile</h3>
-        <span id="applicationId"></span>
-      </div>
+  </main>
 
-      <div class="application-rule"></div>
+  <footer class="footer">
+    © <span id="footerYear"></span> French Coders. All rights reserved.
+  </footer>
 
-      <div class="application-grid">
-        <div class="application-field">
-          <small>FULL NAME</small>
-          <strong id="outName"></strong>
-        </div>
+  <script>
+    const employeeForm = document.getElementById("employeeForm");
+    const registration = document.getElementById("registration");
+    const successPanel = document.getElementById("successPanel");
 
-        <div class="application-field">
-          <small>AGE</small>
-          <strong id="outAge"></strong>
-        </div>
+    // Set the footer year automatically.
+    document.getElementById("footerYear").textContent =
+      new Date().getFullYear();
 
-        <div class="application-field">
-          <small>PHONE NUMBER</small>
-          <strong id="outPhone"></strong>
-        </div>
+    employeeForm.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-        <div class="application-field">
-          <small>EMAIL ADDRESS</small>
-          <strong id="outEmail"></strong>
-        </div>
+      // Do not continue if the form is invalid.
+      if (!employeeForm.reportValidity()) {
+        return;
+      }
 
-        <div class="application-field">
-          <small>HEIGHT</small>
-          <strong id="outHeight"></strong>
-        </div>
+      // Read the name entered by the CURRENT applicant.
+      const applicantName = document.getElementById("name").value.trim();
 
-        <div class="application-field">
-          <small>HIGHEST EDUCATION</small>
-          <strong id="outEducation"></strong>
-        </div>
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const age = document.getElementById("age").value;
+      const height = document.getElementById("height").value;
+      const education = document.getElementById("education").value;
 
-        <div class="application-field full">
-          <small>AREA OF INTEREST</small>
-          <strong id="outRole"></strong>
-        </div>
+      // Read the role selected by the applicant.
+      const selectedRole = employeeForm.querySelector(
+        'input[name="role"]:checked'
+      );
 
-        <div class="application-field full">
-          <small>PROFESSIONAL SKILLS</small>
-          <div id="outSkills" class="skill-list"></div>
-        </div>
-      </div>
+      const role = selectedRole ? selectedRole.value : "Not specified";
 
-      <div class="application-bottom">
-        <span>FRENCH CODERS · EMPLOYEE REGISTRATION</span>
-        <span id="outDate"></span>
-      </div>
+      // Read all checked skills.
+      const skills = Array.from(
+        employeeForm.querySelectorAll('input[name="skills"]:checked')
+      ).map(function (checkbox) {
+        return checkbox.value;
+      });
 
-      <p class="disclaimer">
-        Application preview generated locally in your browser.
-        This is not an employment offer or a server-submitted record.
-      </p>
-    </article>
- 
+      // IMPORTANT: Use the applicant's name, not a fixed name.
+      document.getElementById("thankYouName").textContent = applicantName;
+
+      document.getElementById("thankYouMessage").textContent =
+        "Thank you for your interest in French Coders. " +
+        "Your application for the " + role +
+        " role has been prepared. We appreciate your time and interest.";
+
+      // Fill in the application details.
+      document.getElementById("outName").textContent = applicantName;
+      document.getElementById("outAge").textContent = age + " years";
+      document.getElementById("outPhone").textContent = phone;
+      document.getElementById("outEmail").textContent = email;
+      document.getElementById("outHeight").textContent = height + " cm";
+      document.getElementById("outEducation").textContent = education;
+      document.getElementById("outRole").textContent = role;
+
+      document.getElementById("outSkills").textContent =
+        skills.length > 0 ? skills.join(", ") : "No skills selected";
+
+      document.getElementById("outDate").textContent =
+        new Date().toLocaleDateString("en-IN", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric"
+        });
+
+      // Generate a reference number for this displayed application.
+      const applicationId =
+        "FC-" + Date.now().toString().slice(-8);
+
+      document.getElementById("applicationId").textContent = applicationId;
+
+      // Switch from the form to the confirmation screen.
+      registration.style.display = "none";
+      successPanel.style.display = "block";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    // Return to the form to make corrections.
+    document.getElementById("editBtn").addEventListener("click", function () {
+      successPanel.style.display = "none";
+      registration.style.display = "block";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    });
+
+    // Open the browser's print dialog; users can select Save as PDF.
+    document.getElementById("printBtn").addEventListener("click", function () {
+      window.print();
+    });
+  </script>
+
+</body>
+</html>
